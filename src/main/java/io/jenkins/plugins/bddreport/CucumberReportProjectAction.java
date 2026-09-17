@@ -1,13 +1,13 @@
 package io.jenkins.plugins.bddreport;
 
+import hudson.model.Action;
 import hudson.model.Job;
-import hudson.model.ProminentProjectAction;
 import hudson.model.Run;
 
 /**
  * Jenkins Action on the Job/Project level providing quick access to the latest BDD report.
  */
-public class CucumberReportProjectAction implements ProminentProjectAction {
+public class CucumberReportProjectAction implements Action {
 
     private final Job<?, ?> job;
 
