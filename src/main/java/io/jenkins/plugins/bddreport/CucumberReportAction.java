@@ -71,7 +71,7 @@ public class CucumberReportAction implements RunAction2, SimpleBuildStep.LastBui
 
     @Override
     public String getIconFileName() {
-        return "symbol-clipboard";
+        return "symbol-bdd-report plugin-bdd-report-plugin";
     }
 
     @Override
