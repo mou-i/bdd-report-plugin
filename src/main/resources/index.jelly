@@ -1,0 +1,4 @@
+<?jelly escape-by-default='true'?>
+<div>
+    A modern, interactive, and storage-optimized BDD Cucumber test report generator for Jenkins.
+</div>
