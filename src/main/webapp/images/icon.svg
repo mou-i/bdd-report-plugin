@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="svg-icon">
-    <path fill="#4f46e5" fill-rule="evenodd" clip-rule="evenodd" d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a1 1 0 0 0-.293-.707l-4.5-4.5A1 1 0 0 0 14.5 3H5zm0 2h9v4a1 1 0 0 0 1 1h4v9H5V5zm11 .414L18.586 8H16V5.414z"/>
-    <path fill="#4f46e5" d="M10.707 14.707a1 1 0 0 1-1.414 0l-2-2a1 1 0 1 1 1.414-1.414L10 12.586l4.293-4.293a1 1 0 0 1 1.414 1.414l-5 5z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon">
+    <!-- Top Clip Handle -->
+    <rect x="9" y="2" width="6" height="3" rx="1.5" />
+    <!-- Clipboard Outline with cutouts for trendline -->
+    <path d="M8 5H6a2 2 0 0 0-2 2v5" />
+    <path d="M4 18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+    <path d="M20 7a2 2 0 0 0-2-2h-2" />
+    <!-- Trend Line & Arrow -->
+    <path d="M1.5 20.5l2-2" />
+    <path d="M4.5 16.5l5.5-6 5 4.5 7-7" />
+    <polyline points="17.5 8 22 8 22 12.5" />
 </svg>

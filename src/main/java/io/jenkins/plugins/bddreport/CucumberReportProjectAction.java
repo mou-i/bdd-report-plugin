@@ -21,7 +21,7 @@ public class CucumberReportProjectAction implements Action {
 
     @Override
     public String getIconFileName() {
-        return "symbol-bdd-report plugin-bdd-report-plugin";
+        return "symbol-clipboard";
     }
 
     @Override
