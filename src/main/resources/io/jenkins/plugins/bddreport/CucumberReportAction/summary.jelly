@@ -1,0 +1,15 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <t:summary icon="symbol-document-text plugin-ionicons-api">
+        <b><a href="${it.urlName}/">${%BDD Test Report}</a></b>
+        <j:if test="${it.summary != null}">
+            <div style="margin-top: 4px; font-size: 13px; color: #555;">
+                Scenarios: <b>${it.summary.totalScenarios}</b> |
+                <span style="color: #10b981; font-weight: 600;">Passed: ${it.summary.passedScenarios}</span> |
+                <span style="color: #f43f5e; font-weight: 600;">Failed: ${it.summary.failedScenarios}</span> |
+                <span style="color: #f59e0b; font-weight: 600;">Skipped: ${it.summary.skippedScenarios}</span> |
+                Duration: <b>${it.summary.formattedDuration}</b>
+            </div>
+        </j:if>
+    </t:summary>
+</j:jelly>

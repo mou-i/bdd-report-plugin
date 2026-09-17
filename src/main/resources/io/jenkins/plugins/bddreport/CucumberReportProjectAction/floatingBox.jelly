@@ -1,0 +1,19 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <j:set var="lastReport" value="${from.lastReportAction}"/>
+    <j:if test="${lastReport != null}">
+        <div class="test-trend-caption" style="margin-top: 1em;">
+            <a href="${lastReport.urlName}/">
+                <b>BDD Test Report (Latest Build #${lastReport.run.number})</b>
+            </a>
+            <j:if test="${lastReport.summary != null}">
+                <div style="font-size: 12px; margin-top: 2px;">
+                    Pass Rate: <b>${lastReport.summary.passPercentage}%</b> |
+                    Total: ${lastReport.summary.totalScenarios} |
+                    <span style="color: #10b981;">Passed: ${lastReport.summary.passedScenarios}</span> |
+                    <span style="color: #f43f5e;">Failed: ${lastReport.summary.failedScenarios}</span>
+                </div>
+            </j:if>
+        </div>
+    </j:if>
+</j:jelly>

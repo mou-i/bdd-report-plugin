@@ -1,0 +1,18 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <j:set var="lastReport" value="${it.lastReportAction}"/>
+    <j:choose>
+        <j:when test="${lastReport != null}">
+            <st:redirect url="../${lastReport.run.number}/${it.urlName}/"/>
+        </j:when>
+        <j:otherwise>
+            <l:layout title="BDD Test Report">
+                <st:include page="sidepanel.jelly" it="${it.job}"/>
+                <l:main-panel>
+                    <h2>No BDD Reports Found</h2>
+                    <p>No test execution reports have been published for this project yet.</p>
+                </l:main-panel>
+            </l:layout>
+        </j:otherwise>
+    </j:choose>
+</j:jelly>
