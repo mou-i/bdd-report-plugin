@@ -21,7 +21,7 @@ public class CucumberReportProjectAction implements ProminentProjectAction {
 
     @Override
     public String getIconFileName() {
-        return "symbol-document-text plugin-ionicons-api";
+        return "symbol-bdd-report plugin-bdd-report-plugin";
     }
 
     @Override
