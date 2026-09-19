@@ -1,31 +1,32 @@
 package io.jenkins.plugins.bddreport;
 
-import io.jenkins.plugins.bddreport.model.Attachment;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import io.jenkins.plugins.bddreport.model.CucumberReportPayload;
 import io.jenkins.plugins.bddreport.model.FeatureResult;
 import io.jenkins.plugins.bddreport.model.ReportSummary;
-import io.jenkins.plugins.bddreport.model.ScenarioResult;
-import io.jenkins.plugins.bddreport.model.StepResult;
 import io.jenkins.plugins.bddreport.service.AttachmentExternalizer;
 import io.jenkins.plugins.bddreport.service.CucumberJsonParser;
 import io.jenkins.plugins.bddreport.service.StorageOptimizer;
 import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class StorageOptimizerTest {
 
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
+    @TempDir
+    Path tempDir;
 
     @Test
     public void testOptimizeAndSaveGzip() throws Exception {
-        File buildRootDir = tempFolder.newFolder("build-1");
+        File buildRootDir = tempDir.resolve("build-1").toFile();
+        buildRootDir.mkdirs();
         CucumberJsonParser parser = new CucumberJsonParser();
         List<FeatureResult> features;
 
@@ -39,22 +40,22 @@ public class StorageOptimizerTest {
 
         // Verify summary
         ReportSummary summary = payload.getSummary();
-        Assert.assertEquals(2, summary.getTotalFeatures());
-        Assert.assertEquals(4, summary.getTotalScenarios());
-        Assert.assertEquals(2, summary.getPassedScenarios());
-        Assert.assertEquals(1, summary.getFailedScenarios());
-        Assert.assertEquals(1, summary.getSkippedScenarios());
-        Assert.assertEquals(50.0, summary.getPassPercentage(), 0.01);
+        assertEquals(2, summary.getTotalFeatures());
+        assertEquals(4, summary.getTotalScenarios());
+        assertEquals(2, summary.getPassedScenarios());
+        assertEquals(1, summary.getFailedScenarios());
+        assertEquals(1, summary.getSkippedScenarios());
+        assertEquals(50.0, summary.getPassPercentage(), 0.01);
 
         // Verify GZIP file was written on disk
         File gzFile = new File(buildRootDir, StorageOptimizer.REPORT_GZ_FILENAME);
-        Assert.assertTrue("cucumber-report.json.gz must exist", gzFile.exists());
-        Assert.assertTrue("cucumber-report.json.gz size must be > 0", gzFile.length() > 0);
+        assertTrue(gzFile.exists(), "cucumber-report.json.gz must exist");
+        assertTrue(gzFile.length() > 0, "cucumber-report.json.gz size must be > 0");
 
         // Decompress and verify integrity
         CucumberReportPayload loaded = StorageOptimizer.loadPayloadFromGzip(buildRootDir);
-        Assert.assertNotNull(loaded);
-        Assert.assertEquals(summary.getTotalScenarios(), loaded.getSummary().getTotalScenarios());
+        assertNotNull(loaded);
+        assertEquals(summary.getTotalScenarios(), loaded.getSummary().getTotalScenarios());
 
         // Verify Attachment Externalization
         File attDir = new File(buildRootDir, AttachmentExternalizer.ATTACHMENTS_DIR_NAME);
@@ -64,8 +65,8 @@ public class StorageOptimizerTest {
                 // Check that fragment file can be read back safely
                 AttachmentExternalizer externalizer = new AttachmentExternalizer(buildRootDir);
                 String content = externalizer.readAttachment(fragments[0].getName());
-                Assert.assertNotNull(content);
-                Assert.assertFalse(content.isEmpty());
+                assertNotNull(content);
+                assertFalse(content.isEmpty());
             }
         }
     }

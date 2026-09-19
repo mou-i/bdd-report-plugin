@@ -25,8 +25,8 @@ import org.apache.commons.io.IOUtils;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.HttpResponses;
 import org.kohsuke.stapler.QueryParameter;
-import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.StaplerRequest2;
+import org.kohsuke.stapler.StaplerResponse2;
 
 /**
  * Jenkins Action attached to a specific Build (Run).
@@ -124,7 +124,7 @@ public class CucumberReportAction implements RunAction2, SimpleBuildStep.LastBui
     // lgtm[jenkins/csrf]
     // lgtm[jenkins/no-permission-check]
     @SuppressWarnings({"lgtm[jenkins/csrf]", "lgtm[jenkins/no-permission-check]"})
-    public void doReportData(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    public void doReportData(StaplerRequest2 req, StaplerResponse2 rsp) throws IOException {
         if (run != null) {
             run.checkPermission(Item.READ);
         }
@@ -152,8 +152,8 @@ public class CucumberReportAction implements RunAction2, SimpleBuildStep.LastBui
                              @QueryParameter String mimeType,
                              @QueryParameter boolean download,
                              @QueryParameter String name,
-                             StaplerRequest req,
-                             StaplerResponse rsp) throws IOException {
+                             StaplerRequest2 req,
+                             StaplerResponse2 rsp) throws IOException {
         if (run != null) {
             run.checkPermission(Item.READ);
         }
@@ -199,7 +199,7 @@ public class CucumberReportAction implements RunAction2, SimpleBuildStep.LastBui
     // lgtm[jenkins/csrf]
     // lgtm[jenkins/no-permission-check]
     @SuppressWarnings({"lgtm[jenkins/csrf]", "lgtm[jenkins/no-permission-check]"})
-    public void doDownloadReport(StaplerRequest req, StaplerResponse rsp) throws IOException {
+    public void doDownloadReport(StaplerRequest2 req, StaplerResponse2 rsp) throws IOException {
         if (run != null) {
             run.checkPermission(Item.READ);
         }
