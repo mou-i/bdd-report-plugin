@@ -23,5 +23,15 @@ jobs:
           java-version: '11'
           cache: 'maven'
 
-      - name: Build and Test with Maven
-        run: mvn clean test -B
+      - name: Build, Test & Package Plugin
+        run: mvn clean test process-resources hpi:hpi -B
+
+      - name: Upload Plugin HPI Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bdd-report-plugin
+          path: |
+            target/*.hpi
+            target/*.jar
+          if-no-files-found: error
+          retention-days: 30
