@@ -22,11 +22,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import hudson.model.Item;
+import jenkins.model.Jenkins;
 import jenkins.tasks.SimpleBuildStep;
 import org.jenkinsci.Symbol;
+import org.kohsuke.stapler.AncestorInPath;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
+import org.kohsuke.stapler.verb.POST;
 
 /**
  * Jenkins Post-Build Publisher (Recorder) that parses Cucumber JSON files from the workspace,
@@ -177,14 +181,26 @@ public class CucumberReportPublisher extends Recorder implements SimpleBuildStep
             return "Publish BDD Cucumber Report";
         }
 
-        public FormValidation doCheckJsonReportPath(@QueryParameter String value) {
+        @POST
+        public FormValidation doCheckJsonReportPath(@AncestorInPath Item item, @QueryParameter String value) {
+            if (item != null) {
+                item.checkPermission(Item.CONFIGURE);
+            } else {
+                Jenkins.get().checkPermission(Jenkins.ADMINISTER);
+            }
             if (value == null || value.trim().isEmpty()) {
                 return FormValidation.error("Cucumber JSON file pattern cannot be empty (e.g. **/cucumber.json)");
             }
             return FormValidation.ok();
         }
 
-        public FormValidation doCheckAttachmentThresholdKB(@QueryParameter String value) {
+        @POST
+        public FormValidation doCheckAttachmentThresholdKB(@AncestorInPath Item item, @QueryParameter String value) {
+            if (item != null) {
+                item.checkPermission(Item.CONFIGURE);
+            } else {
+                Jenkins.get().checkPermission(Jenkins.ADMINISTER);
+            }
             try {
                 int kb = Integer.parseInt(value);
                 if (kb <= 0) {

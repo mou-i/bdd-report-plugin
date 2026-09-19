@@ -1,0 +1,26 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - "main"
+      - "master"
+    tags:
+      - "**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check repository owner
+        id: check_owner
+        run: >
+          echo "owner_allowed=${{ github.repository_owner == 'jenkinsci' }}" >> "$GITHUB_OUTPUT"
+    outputs:
+      owner_allowed: ${{ steps.check_owner.outputs.owner_allowed }}
+
+  release:
+    needs: [validate]
+    if: needs.validate.outputs.owner_allowed == 'true'
+    uses: jenkins-infra/github-reusable-workflows/.github/workflows/maven-cd.yml@v1
+    secrets: inherit

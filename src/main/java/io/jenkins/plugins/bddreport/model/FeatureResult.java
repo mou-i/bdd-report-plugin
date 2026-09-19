@@ -19,6 +19,8 @@ public class FeatureResult implements Serializable {
     private String name;
     private String uri;
     private String description;
+    // lgtm[jenkins/plaintext-storage]
+    @SuppressWarnings("lgtm[jenkins/plaintext-storage]")
     private String keyword;
     private int line;
     private List<String> tags = new ArrayList<>();

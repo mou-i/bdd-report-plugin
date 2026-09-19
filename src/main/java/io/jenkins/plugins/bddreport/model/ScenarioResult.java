@@ -18,6 +18,8 @@ public class ScenarioResult implements Serializable {
     private String id;
     private String name;
     private String description;
+    // lgtm[jenkins/plaintext-storage]
+    @SuppressWarnings("lgtm[jenkins/plaintext-storage]")
     private String keyword;
     private String type;
     private int line;

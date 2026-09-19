@@ -7,18 +7,18 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.88</version>
+        <version>5.7</version>
         <relativePath/>
     </parent>
 
     <groupId>io.jenkins.plugins</groupId>
-    <artifactId>bdd-report-plugin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>bdd-report</artifactId>
+    <version>${changelist}</version>
     <packaging>hpi</packaging>
 
     <name>BDD Cucumber Test Report Plugin</name>
     <description>Modern, interactive, and storage-optimized BDD Cucumber test report generator for Jenkins.</description>
-    <url>https://github.com/jenkinsci/bdd-report-plugin</url>
+    <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
 
     <licenses>
         <license>
@@ -27,64 +27,58 @@
         </license>
     </licenses>
 
-    <developers>
-        <developer>
-            <id>monu_devbgu7yfdr</id>
-            <name>Mouli</name>
-            <email>monubammidi@gmail.com</email>
-        </developer>
-    </developers>
-
     <scm>
-        <connection>scm:git:https://github.com/jenkinsci/bdd-report-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/bdd-report-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/bdd-report-plugin</url>
+        <connection>scm:git:https://github.com/jenkinsci/${project.artifactId}-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/${project.artifactId}-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
         <tag>${scmTag}</tag>
     </scm>
 
     <properties>
-        <jenkins.version>2.440.3</jenkins.version>
-        <jenkins.baseline>2.440</jenkins.baseline>
-        <java.level>11</java.level>
+        <changelist>999999-SNAPSHOT</changelist>
+        <jenkins.version>2.541.3</jenkins.version>
+        <hpi.strictBundledArtifacts>true</hpi.strictBundledArtifacts>
+        <banObsoleteDependencyOverrides.skip>false</banObsoleteDependencyOverrides.skip>
+        <ban-junit4-imports.skip>false</ban-junit4-imports.skip>
+        <ban-deprecated-stapler.skip>false</ban-deprecated-stapler.skip>
+        <ban-commons-lang-2.skip>false</ban-commons-lang-2.skip>
         <spotbugs.effort>Max</spotbugs.effort>
         <spotbugs.threshold>Low</spotbugs.threshold>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jenkins.tools.bom</groupId>
+                <artifactId>bom-2.541.x</artifactId>
+                <version>7002.v028a_3607ddc8</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-        <!-- Jackson for high-performance JSON parsing and streaming -->
+        <!-- Jenkins API Plugins -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.17.0</version>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>jackson2-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.17.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.17.0</version>
+            <groupId>io.jenkins.plugins</groupId>
+            <artifactId>commons-compress-api</artifactId>
         </dependency>
 
         <!-- Apache Commons IO for safe file streaming -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.16.1</version>
         </dependency>
 
-        <!-- Apache Commons Compress for GZIP & archive optimization -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.26.1</version>
-        </dependency>
+        <!-- Apache Commons Codec for encoding/hashing -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.16.1</version>
         </dependency>
 
         <!-- Test dependencies -->

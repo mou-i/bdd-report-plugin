@@ -15,6 +15,8 @@ public class StepResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    // lgtm[jenkins/plaintext-storage]
+    @SuppressWarnings("lgtm[jenkins/plaintext-storage]")
     private String keyword;
     private String name;
     private int line;
