@@ -27,6 +27,21 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>monu_devbgu7yfdr</id>
+            <name>Mouli</name>
+            <email>monubammidi@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/jenkinsci/bdd-report-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/bdd-report-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/bdd-report-plugin</url>
+        <tag>${scmTag}</tag>
+    </scm>
+
     <properties>
         <jenkins.version>2.440.3</jenkins.version>
         <jenkins.baseline>2.440</jenkins.baseline>
